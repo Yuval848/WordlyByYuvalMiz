@@ -26,9 +26,9 @@ class KeyboardView extends LinearLayout implements View.OnClickListener {
         LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         this.setOrientation(VERTICAL);
         this.addView(tv);
-        loadLeboard('א');
-        loadLeboard('י');
-        loadLeboard('ע');
+        loadLeboard('a');
+        loadLeboard('j');
+        loadLeboard('s');
         loadSpaceAndDelete();
     }
 
@@ -38,7 +38,7 @@ class KeyboardView extends LinearLayout implements View.OnClickListener {
     {
         LinearLayout l = new LinearLayout(context);
         LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(0, 100, 0, 0);
+        layoutParams.setMargins(100, 50, 0, 0);
         l.setLayoutParams(layoutParams);
 
         for(int i=0;i<9;i++)
@@ -59,17 +59,16 @@ class KeyboardView extends LinearLayout implements View.OnClickListener {
 
     public void loadSpaceAndDelete()
     {
-        Button space=new Button(context);
-        space.setBackgroundResource(android.R.drawable.editbox_background);
-        space.setText(String.valueOf(""));
-        space.setBackgroundColor(Color.GRAY);
+        Button submit=new Button(context);
+        submit.setBackgroundResource(android.R.drawable.editbox_background);
+        submit.setBackgroundColor(Color.GRAY);
         LayoutParams btnParam=new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        btnParam.setMargins(20, 50, 20, 0);
-        space.setLayoutParams(btnParam);
-        space.setText(String.valueOf("רווח"));
-        this.addView(space);
+        btnParam.setMargins(100, 10, 20, 0);
+        submit.setLayoutParams(btnParam);
+        submit.setText(String.valueOf("submit"));
+        this.addView(submit);
 
-        space.setOnClickListener(this);
+        submit.setOnClickListener(this);
         Button delete=new Button(context);
         delete.setBackgroundResource(android.R.drawable.editbox_background);
         delete.setText(String.valueOf("delete"));
@@ -91,9 +90,9 @@ class KeyboardView extends LinearLayout implements View.OnClickListener {
             if(this.str.length()>0)
                 this.str=this.str.substring(0,this.str.length()-1);
         }
-        else if(s.equals("רווח"))
+        else if(s.equals("submit"))
         {
-            this.str+=" ";
+            ((GameActivity)context).transferUserGuess(str);
         }
         else
         {

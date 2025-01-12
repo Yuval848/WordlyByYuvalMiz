@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,6 +51,15 @@ public class GameActivity extends AppCompatActivity {
     CellBox cellBox;
 
     String random5LetterWord = "https://random-word-api.herokuapp.com/word?length=5";
+    String userGuess;
+
+    public void transferUserGuess(String str) {
+        userGuess = str;
+        startGame();
+    }
+
+
+
 
     public class DownloadJson extends AsyncTask<String,Void,String>{
 
@@ -89,16 +99,19 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        m=new KeyboardView(this);
-        linearLayout3.addView(m);
+
+
 
         linearLayout = findViewById(R.id.activitygame);
         linearLayout1 = findViewById(R.id.firstLayout);
         linearLayout2 = findViewById(R.id.secondLayout);
         linearLayout3 = findViewById(R.id.thirdLayout);
 
+
         BoardGame boardGame = new BoardGame(this);
         linearLayout2.addView(boardGame);
+        m=new KeyboardView(this);
+        linearLayout3.addView(m);
 
 
 
@@ -124,12 +137,19 @@ public class GameActivity extends AppCompatActivity {
         }
         attempts =0;
         targetWord = result;
+        Toast.makeText(this, ""+targetWord, Toast.LENGTH_SHORT).show();
+    }
+    private void startGame() {
+        if (userGuess.length()!=5)
+            Toast.makeText(this, "your word is not 5 letters", Toast.LENGTH_SHORT).show();
+        if(!(isWordValid(userGuess))){
 
+        }
     }
 
+    private boolean isWordValid(String userGuess) {
 
-
-
+    }
 
 
     private void setBackgroundColor(String backgroundColor) {
