@@ -143,13 +143,21 @@ public class GameActivity extends AppCompatActivity {
         if (userGuess.length()!=5)
             Toast.makeText(this, "your word is not 5 letters", Toast.LENGTH_SHORT).show();
         if(!(isWordValid(userGuess))){
+            Toast.makeText(this, "your word does not exists in English", Toast.LENGTH_SHORT).show();
+        }
+        if((isWordValid(userGuess))&&(userGuess.length())==5){
 
         }
+
     }
 
     private boolean isWordValid(String userGuess) {
-
+        /// TODO: 13/01/2025 להשלים את זה עם api
+        /// TODO: 13/01/2025 https://api.datamuse.com/words?sp=?????&max=1000
+        //nigger
+        return(true);
     }
+
 
 
     private void setBackgroundColor(String backgroundColor) {
