@@ -16,12 +16,15 @@ public class Cell {
         this.top = top;
         this.right = right;
         this.bottom = bottom;
-        this.backgroundColor = Color.WHITE;  // Default color is white
+          // Default color is white
     }
 
     // Method to set the background color of the cell
     public void setBackgroundColor(int color) {
         this.backgroundColor = color;
+    }
+    public int getBackgroundColor() {
+        return this.backgroundColor;
     }
 
     // Method to draw the cell on the canvas

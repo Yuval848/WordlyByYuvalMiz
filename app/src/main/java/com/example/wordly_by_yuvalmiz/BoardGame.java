@@ -86,5 +86,11 @@ public class BoardGame extends View {
             invalidate();  // Redraw the view to apply the new color
         }
     }
+    public int getCellBackgroundColor(int row, int col) {
+        if (row >= 0 && row < ROWS && col >= 0 && col < COLS) {
+            return gridCells[row][col].getBackgroundColor();
+        }
+        return Color.WHITE; // Default color if out of bounds
+    }
 
 }
