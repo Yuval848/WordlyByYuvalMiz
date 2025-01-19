@@ -2,38 +2,18 @@ package com.example.wordly_by_yuvalmiz;
 
 
 import android.content.Intent;
-
-
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.content.Context;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 public class GameActivity extends AppCompatActivity {
@@ -48,7 +28,7 @@ public class GameActivity extends AppCompatActivity {
     private String targetWord;
     private int attempts;
     String result = null;
-    CellBox cellBox;
+
 
     String random5LetterWord = "https://random-word-api.herokuapp.com/word?length=5";
     String userGuess;
@@ -146,6 +126,16 @@ public class GameActivity extends AppCompatActivity {
             Toast.makeText(this, "your word does not exists in English", Toast.LENGTH_SHORT).show();
         }
         if((isWordValid(userGuess))&&(userGuess.length())==5){
+            for (int i = 0; i < 5; i++) {
+                if(userGuess.charAt(i)==targetWord.charAt(i)){
+                    boardGame.setCellBackgroundColor(attempts, i, Color.GREEN);
+                }
+
+            }
+            {
+
+            }
+
 
         }
 
@@ -154,7 +144,7 @@ public class GameActivity extends AppCompatActivity {
     private boolean isWordValid(String userGuess) {
         /// TODO: 13/01/2025 להשלים את זה עם api
         /// TODO: 13/01/2025 https://api.datamuse.com/words?sp=?????&max=1000
-        //nigger
+
         return(true);
     }
 
