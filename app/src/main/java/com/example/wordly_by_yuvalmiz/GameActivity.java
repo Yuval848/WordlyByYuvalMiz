@@ -128,7 +128,7 @@ public class GameActivity extends AppCompatActivity {
         if((isWordValid(userGuess))&&(userGuess.length())==5){
             for (int i = 0; i < 5; i++) {
                 if(userGuess.charAt(i)==targetWord.charAt(i)){
-                    boardGame.setCellBackgroundColor(attempts, i, Color.GREEN);
+                    (BoardGame).setCellBackgroundColor(attempts, i, Color.GREEN);
                 }
 
             }
