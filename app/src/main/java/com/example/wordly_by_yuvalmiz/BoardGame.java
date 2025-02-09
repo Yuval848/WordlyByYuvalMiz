@@ -14,14 +14,15 @@ public class BoardGame extends View {
 
     private Paint gridPaint;
     private Paint cellPaint;
-    private Cell[][] gridCells;  // 2D array of cells
+    public Cell[][] gridCells;  // 2D array of cells
+    private boolean firstTime = true;
 
     public BoardGame(Context context) {
         super(context);
         init();
     }
 
-    public BoardGame(Context context, AttributeSet attrs) {
+/*    public BoardGame(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
@@ -29,7 +30,7 @@ public class BoardGame extends View {
     public BoardGame(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
-    }
+    }*/
 
     // Initialize the paint object and grid cells
     private void init() {
@@ -49,34 +50,47 @@ public class BoardGame extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+         if(firstTime)
+         {
+             int width = getWidth();
+             int height = getHeight();
+
+             // Calculate the width and height for each cell in the grid
+             float cellWidth = (width - 2 * PADDING) / COLS;
+             float cellHeight = (height - 2 * PADDING) / ROWS;
+
+             // Draw the grid and create Cell objects with unique IDs
+             int cellId = 0;
+             for (int row = 0; row < ROWS; row++) {
+                 for (int col = 0; col < COLS; col++) {
+                     // Calculate the position of each cell
+                     float left = PADDING + col * cellWidth;
+                     float top = PADDING + row * cellHeight;
+                     float right = left + cellWidth;
+                     float bottom = top + cellHeight;
+
+                     // Create a new Cell with a unique ID
+                     gridCells[row][col] = new Cell(cellId, left, top, right, bottom);
+
+
+                     // Increment cell ID for the next cell
+                     cellId++;
+                 }
+             }
+             firstTime = false;
+         }
+
+         for (int row = 0; row < ROWS; row++) {
+             for (int col = 0; col < COLS; col++) {
+                 // Draw the rectangle for this cell
+                 gridCells[row][col].draw(canvas, cellPaint);
+
+             }
+         }
+
+
         // Get the width and height of the view
-        int width = getWidth();
-        int height = getHeight();
 
-        // Calculate the width and height for each cell in the grid
-        float cellWidth = (width - 2 * PADDING) / COLS;
-        float cellHeight = (height - 2 * PADDING) / ROWS;
-
-        // Draw the grid and create Cell objects with unique IDs
-        int cellId = 0;
-        for (int row = 0; row < ROWS; row++) {
-            for (int col = 0; col < COLS; col++) {
-                // Calculate the position of each cell
-                float left = PADDING + col * cellWidth;
-                float top = PADDING + row * cellHeight;
-                float right = left + cellWidth;
-                float bottom = top + cellHeight;
-
-                // Create a new Cell with a unique ID
-                gridCells[row][col] = new Cell(cellId, left, top, right, bottom);
-
-                // Draw the rectangle for this cell
-                gridCells[row][col].draw(canvas, cellPaint);
-
-                // Increment cell ID for the next cell
-                cellId++;
-            }
-        }
     }
 
     // Method to update the background color of a specific cell

@@ -121,6 +121,9 @@ public class GameActivity extends AppCompatActivity {
         targetWord = result;
         Toast.makeText(this, ""+targetWord, Toast.LENGTH_SHORT).show();
     }
+
+
+
     private void startGame() {
         if (userGuess.length() != 5) {
             Toast.makeText(this, "Your word is not 5 letters", Toast.LENGTH_SHORT).show();
@@ -174,6 +177,9 @@ public class GameActivity extends AppCompatActivity {
                 Toast.makeText(this, "Game over! The word was: " + targetWord, Toast.LENGTH_SHORT).show();
             }
         }
+
+        //boardGame.gridCells[0][0].setBackgroundColor(Color.RED);
+        boardGame.setCellBackgroundColor(0,0,Color.RED);
     }
 
 
