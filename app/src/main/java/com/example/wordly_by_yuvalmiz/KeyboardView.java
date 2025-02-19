@@ -45,7 +45,7 @@ class KeyboardView extends LinearLayout implements View.OnClickListener {
         {
             Button btn=new Button(context);
             btn.setBackgroundResource(android.R.drawable.editbox_background);
-            btn.setText(String.valueOf(ch));
+            btn.setText((String.valueOf(ch)).toLowerCase());
             //LayoutParams btnParam=new LayoutParams(120,120);
             LayoutParams btnParam=new LayoutParams(85,85);
             btn.setLayoutParams(btnParam);

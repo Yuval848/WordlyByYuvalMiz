@@ -7,7 +7,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=" בחר צבע"
+        android:text=" בחר צבע לרקע"
         android:textSize="40dp"
         android:textColor="#ED0606"></TextView>
 

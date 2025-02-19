@@ -28,7 +28,7 @@ public class GameActivity extends AppCompatActivity {
 
 
     private String targetWord;
-    private int attempts;
+    private int attempts=0;
     String result = null;
 
 
@@ -117,7 +117,6 @@ public class GameActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        attempts =0;
         targetWord = result;
         Toast.makeText(this, ""+targetWord, Toast.LENGTH_SHORT).show();
     }
@@ -125,70 +124,57 @@ public class GameActivity extends AppCompatActivity {
 
 
     private void startGame() {
-        if (userGuess.length() != 5) {
-            Toast.makeText(this, "Your word is not 5 letters", Toast.LENGTH_SHORT).show();
-            return;
-        }
+        if (attempts > 6) {
+            if (userGuess.length() != 5) {
+                Toast.makeText(this, "Your word is not 5 letters", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-        if (!isWordValid(userGuess)) {
-            Toast.makeText(this, "Your word does not exist in English", Toast.LENGTH_SHORT).show();
-            return;
-        }
+            if (!isWordValid(userGuess)) {
+                Toast.makeText(this, "Your word does not exist in English", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-        if (isWordValid(userGuess) && userGuess.length() == 5) {
-            boolean[] targetMatched = new boolean[5]; // Tracks matched letters in the target word
-            boolean[] guessMatched = new boolean[5]; // Tracks matched letters in the user guess
+            if (isWordValid(userGuess) && userGuess.length() == 5) {
+                for (int i = 0; i < 5; i++) {
+                    if (userGuess.charAt(i) == targetWord.charAt(i))
+                        boardGame.setCellBackgroundColor(attempts, i, Color.GREEN);
+                    else if (YellowSquare(userGuess.charAt(i)))
+                        boardGame.setCellBackgroundColor(attempts, i, Color.YELLOW);
+                    else
+                        boardGame.setCellBackgroundColor(attempts, i, Color.RED);
 
-            // First pass: Check for correct positions (green)
-            for (int i = 0; i < 5; i++) {
-                if (userGuess.charAt(i) == targetWord.charAt(i)) {
-                    boardGame.setCellBackgroundColor(attempts, i, Color.GREEN);
-                    targetMatched[i] = true;
-                    guessMatched[i] = true;
+
                 }
+                attempts++;
             }
 
-            // Second pass: Check for correct letters in wrong positions (yellow)
-            for (int i = 0; i < 5; i++) {
-                if (!guessMatched[i]) {
-                    for (int j = 0; j < 5; j++) {
-                        if (!targetMatched[j] && userGuess.charAt(i) == targetWord.charAt(j)) {
-                            boardGame.setCellBackgroundColor(attempts, i, Color.YELLOW);
-                            targetMatched[j] = true;
-                            break;
-                        }
-                    }
-                }
-            }
-
-            // Third pass: Mark unmatched letters as gray
-            for (int i = 0; i < 5; i++) {
-                if (!guessMatched[i] && boardGame.getCellBackgroundColor(attempts, i) == Color.WHITE) {
-                    boardGame.setCellBackgroundColor(attempts, i, Color.GRAY);
-                }
-            }
-
-            attempts++;
-
-            // Check if the game is won
-            if (userGuess.equals(targetWord)) {
-                Toast.makeText(this, "Congratulations! You guessed the word!", Toast.LENGTH_SHORT).show();
-            } else if (attempts == 6) {
-                Toast.makeText(this, "Game over! The word was: " + targetWord, Toast.LENGTH_SHORT).show();
-            }
         }
-
-        //boardGame.gridCells[0][0].setBackgroundColor(Color.RED);
-        boardGame.setCellBackgroundColor(0,0,Color.RED);
     }
 
 
-    private boolean isWordValid(String userGuess) {
-        /// TODO: 13/01/2025 להשלים את זה עם api
-        /// TODO: 13/01/2025 https://api.datamuse.com/words?sp=?????&max=1000
+
+
+
+
+
+
+    private boolean YellowSquare(char a) {
+        for (int j = 0; j <5; j++) {
+            if (a ==targetWord.charAt(j))
+                return true;
+        }
+        return false;
+    }
+
+
+    private boolean isWordValid(String word) {
+        /// TODO: 13/01/2025 להפוך את הקו השחור שירשום במקום בקו על הרשת
+        /// TODO: 13/01/2025 https://api.datamuse.com/words?sp=YOUR_WORD_HERE, הרעיון הוא שתיקח את הלינק הזה שבו אתה מקבל responses ואיתם אתה עובר על המילים שקיבלת ובודק אם היא שם.
 
         return(true);
     }
+
 
 
 
