@@ -34,6 +34,7 @@ public class GameActivity extends AppCompatActivity {
 
     String random5LetterWord = "https://random-word-api.herokuapp.com/word?length=5";
     String userGuess;
+    int Greenflag =0; //count of how many letters are correct
 
     public void transferUserGuess(String str) {
         userGuess = str;
@@ -117,14 +118,14 @@ public class GameActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        targetWord = result;
+        targetWord = result.replaceAll("[\\[\\]\" ]", "");
         Toast.makeText(this, ""+targetWord, Toast.LENGTH_SHORT).show();
     }
 
 
 
     private void startGame() {
-        if (attempts > 6) {
+        if (attempts < 6) {
             if (userGuess.length() != 5) {
                 Toast.makeText(this, "Your word is not 5 letters", Toast.LENGTH_SHORT).show();
                 return;
@@ -137,8 +138,10 @@ public class GameActivity extends AppCompatActivity {
 
             if (isWordValid(userGuess) && userGuess.length() == 5) {
                 for (int i = 0; i < 5; i++) {
-                    if (userGuess.charAt(i) == targetWord.charAt(i))
+                    if (userGuess.charAt(i) == targetWord.charAt(i)) {
                         boardGame.setCellBackgroundColor(attempts, i, Color.GREEN);
+                        Greenflag++;
+                    }
                     else if (YellowSquare(userGuess.charAt(i)))
                         boardGame.setCellBackgroundColor(attempts, i, Color.YELLOW);
                     else
@@ -148,8 +151,15 @@ public class GameActivity extends AppCompatActivity {
                 }
                 attempts++;
             }
+            if(Greenflag == 5)
+            {
+                Toast.makeText(this, "congratulations you have won", Toast.LENGTH_SHORT).show();
+                //dialog
+            }
+            Greenflag =0;
 
         }
+        //else להציג דיאלוג
     }
 
 
