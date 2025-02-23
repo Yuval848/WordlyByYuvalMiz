@@ -93,6 +93,7 @@ class KeyboardView extends LinearLayout implements View.OnClickListener {
         else if(s.equals("submit"))
         {
             ((GameActivity)context).transferUserGuess(str);
+
         }
         else
         {
