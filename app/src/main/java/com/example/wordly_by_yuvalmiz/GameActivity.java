@@ -30,10 +30,11 @@ public class GameActivity extends AppCompatActivity {
     private String targetWord;
     private int attempts=0;
     String result = null;
-
+    Boolean firstTime = true;
 
     String random5LetterWord = "https://random-word-api.herokuapp.com/word?length=5";
     String userGuess;
+    int k =0;//counter of the row
     int Greenflag =0; //count of how many letters are correct
 
     public void transferUserGuess(String str) {
@@ -41,7 +42,24 @@ public class GameActivity extends AppCompatActivity {
         startGame();
     }
 
+    public void transferToBoard(String str) {//פעולה שאמורה לכתוב את המילה בתוך המשבצות
+        if(firstTime){//אם submit נלחץ בפעם הראשונה
+            for (int i = 0; i < 5; i++) {
+                char a = str.charAt(i);
 
+            }
+            firstTime = false;
+        }
+
+        else {//אם submit נלחץ כבר בעבר
+            k++;
+            for (int i = 0; i < 5; i++) {
+
+            }
+
+        }
+
+    }
 
 
     public class DownloadJson extends AsyncTask<String,Void,String>{
@@ -149,14 +167,23 @@ public class GameActivity extends AppCompatActivity {
 
 
                 }
+                for (int i = 0; i < 5; i++) {
+                    boardGame.setNewWord(attempts,userGuess);
+
+                }
                 attempts++;
             }
+
             if(Greenflag == 5)
             {
                 Toast.makeText(this, "congratulations you have won", Toast.LENGTH_SHORT).show();
                 //dialog
             }
             Greenflag =0;
+
+
+
+
 
         }
         //else להציג דיאלוג

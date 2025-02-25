@@ -9,6 +9,8 @@ public class Cell {
     float left, top, right, bottom;  // Coordinates of the cell
     private int backgroundColor;  // Background color of the cell
 
+    char Char;
+
     // Constructor for creating a cell
     public Cell(int cellId, float left, float top, float right, float bottom) {
         this.cellId = cellId;
@@ -40,7 +42,15 @@ public class Cell {
         paint.setColor(backgroundColor);
         canvas.drawRect(left+4, top+4, right-4, bottom-4, paint);
 
-        // Draw the border of the cell (if needed)
 
+        Paint p = new Paint();
+        p.setTextSize(100);
+        canvas.drawText(""+Char,left+50,bottom-50,p);
+
+
+    }
+
+    public void setChar(char c) {
+        this.Char = c;
     }
 }

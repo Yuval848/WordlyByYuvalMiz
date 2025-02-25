@@ -22,17 +22,7 @@ public class BoardGame extends View {
         init();
     }
 
-/*    public BoardGame(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init();
-    }
 
-    public BoardGame(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init();
-    }*/
-
-    // Initialize the paint object and grid cells
     private void init() {
         gridPaint = new Paint();
         gridPaint.setColor(0xFF000000);  // Set grid color (black)
@@ -89,22 +79,24 @@ public class BoardGame extends View {
          }
 
 
-        // Get the width and height of the view
 
     }
 
-    // Method to update the background color of a specific cell
+    // method to update the background color of a specific cell
     public void setCellBackgroundColor(int row, int col, int color) {
         if (row >= 0 && row < ROWS && col >= 0 && col < COLS) {
             gridCells[row][col].setBackgroundColor(color);
             invalidate();  // Redraw the view to apply the new color
         }
     }
-    public int getCellBackgroundColor(int row, int col) {
-        if (row >= 0 && row < ROWS && col >= 0 && col < COLS) {
-            return gridCells[row][col].getBackgroundColor();
-        }
-        return Color.WHITE; // Default color if out of bounds
-    }
 
+
+    public void setNewWord(int row,String userguess) {
+        for (int i = 0; i < 5; i++) {
+            gridCells[row][i].setChar(userguess.charAt(i));
+            invalidate();
+        }
+
+
+    }
 }
